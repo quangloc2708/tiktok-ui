@@ -2,8 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600;700&display=swap');
 
 :root {
-    --primary: #ef2950;
+    --primary: rgba(254, 44, 85, 1);
     --black: #000;
+    --white: #fff;
     --text-color: #333;
     //default layout
     --default-layout-header-height: 60px;
@@ -27,8 +28,9 @@ body {
     font-family: 'IBM Plex Sans', sans-serif;
 }
 
-a [href] {
+a[href] {
     color: var(--text-color);
+    text-decoration: none;
 }
 
 button,
