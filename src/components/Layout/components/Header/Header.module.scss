@@ -11,6 +11,7 @@
 .inner {
     height: 100%;
     width: var(--default-layout-width);
+    padding: 0 var(--default-layout-horizontal-spacer);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -86,10 +87,28 @@
         background-color: rgba(22, 24, 35, 0.06);
     }
 }
-
+.actions {
+    display: inline-block;
+    align-items: center;
+}
 .more-btn {
     margin-left: 28px;
     font-size: 2rem;
     background-color: transparent;
     padding: 4px 8px;
+}
+.action-btn {
+    background-color: transparent;
+    font-size: 2.4rem;
+    color: #161823;
+    padding: 4px 16px;
+    cursor: pointer;
+}
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: 12px;
+    cursor: pointer;
 }
