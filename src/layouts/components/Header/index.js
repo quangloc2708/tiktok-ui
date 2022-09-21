@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
     faArrowRightFromBracket,
     faCircleQuestion,
@@ -17,6 +18,7 @@ import config from '~/config';
 import 'tippy.js/dist/tippy.css';
 import images from '~/assets/images';
 import Button from '~/components/Button';
+import Modal from '~/components/Modal';
 import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import Menu from '~/components/Popper/Menu';
@@ -81,7 +83,8 @@ const userMenu = [
 ];
 
 function Header() {
-    const currentUser = true;
+    const [modalIsOpen, setIsOpen] = useState(false);
+    const currentUser = false;
 
     //Handle
     const handleMenuChange = (menuItem) => {
@@ -92,6 +95,14 @@ function Header() {
             default:
         }
     };
+
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
 
     return (
         <header className={cx('wrapper')}>
@@ -105,17 +116,17 @@ function Header() {
                 <div className={cx('actions')}>
                     {currentUser ? (
                         <>
-                            <Tippy delay={[0, 50]} content="Upload video" placement="bottom">
+                            <Tippy delay={[0, 0]} content="Upload video" placement="bottom">
                                 <button className={cx('action-btn')}>
                                     <UploadIcon />
                                 </button>
                             </Tippy>
-                            <Tippy delay={[0, 50]} content="Message" placement="bottom">
+                            <Tippy delay={[0, 0]} content="Message" placement="bottom">
                                 <button className={cx('action-btn')}>
                                     <MessageIcon />
                                 </button>
                             </Tippy>
-                            <Tippy delay={[0, 50]} content="Inbox" placement="bottom">
+                            <Tippy delay={[0, 0]} content="Inbox" placement="bottom">
                                 <button className={cx('action-btn')}>
                                     <InboxIcon />
                                     <span className={cx('badge')}>5</span>
@@ -125,14 +136,16 @@ function Header() {
                     ) : (
                         <>
                             <Button text>Up load</Button>
-                            <Button primary>Log in</Button>
+                            <Button primary to="/">
+                                Log in
+                            </Button>
                         </>
                     )}
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
                             <Image
                                 className={cx('user-avatar')}
-                                src="https://scontent.fdad3-4.fna.fbcdn.net/v/t39.30808-6/276123415_1026618044607161_8935125298062252965_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=xU68ldn6IuwAX_NOOH7&_nc_oc=AQlamYQ9sby5EdFPD3x5_BmUtGmjuWmO6zITl7pdfRrp7eJgojPkIyr4EYmlDjmwv71lQfvxLDhtacrlE-yNLRPY&_nc_ht=scontent.fdad3-4.fna&oh=00_AT-GW_9feJlB4qlL-w80YDWemp8jG2KfWCNZ-UD6ZubPSg&oe=62926055"
+                                src="https://scontent.fdad3-4.fna.fbcdn.net/v/t39.30808-1/276123415_1026618044607161_8935125298062252965_n.jpg?stp=dst-jpg_p320x320&_nc_cat=105&ccb=1-7&_nc_sid=7206a8&_nc_ohc=9ZiTUBPA7H0AX8s2Is7&_nc_ht=scontent.fdad3-4.fna&oh=00_AT-xa3a8kItAhFqbei4KMwt9WobZNsthgf-HJwOgMAxYiw&oe=630063D7"
                                 alt=""
                             />
                         ) : (
@@ -143,6 +156,19 @@ function Header() {
                     </Menu>
                 </div>
             </div>
+
+            <button onClick={openModal}>Open Modal</button>
+            <Modal isOpen={modalIsOpen}>
+                <button onClick={closeModal}>close</button>
+                <div>I am a modal</div>
+                <form>
+                    <input />
+                    <button>tab navigation</button>
+                    <button>stays</button>
+                    <button>inside</button>
+                    <button>the modal</button>
+                </form>
+            </Modal>
         </header>
     );
 }
